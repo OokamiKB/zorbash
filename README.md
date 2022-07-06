@@ -1,9 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- some larg delays on level2 of victimlake                                                                                                     -->
 <!-- stone cloak makes ascii walls vanish                                                                                                         -->
-<!-- clicking the tile over a web should cause a jump?                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

@@ -43,7 +43,7 @@ void Thing::on_fall(void)
   }
 }
 
-void Thing::fall(float fall_height, ts_t ms)
+bool Thing::fall(void)
 {
   TRACE_NO_INDENT();
 
@@ -51,17 +51,17 @@ void Thing::fall(float fall_height, ts_t ms)
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
     dbg("No");
-    return;
+    return false;
   }
 
   if (is_critical_to_level()) {
     dbg("No, critical");
-    return;
+    return false;
   }
 
   if (! is_able_to_fall()) {
     dbg("No, unable to fall");
-    return;
+    return false;
   }
 
   //
@@ -69,11 +69,32 @@ void Thing::fall(float fall_height, ts_t ms)
   //
   if (is_dead_on_falling()) {
     dead("No, dead on falling");
-    return;
+    return false;
+  }
+
+  const float fall_height = 1;
+  auto        duration    = THING_FALL_SPEED_MS;
+
+  //
+  // Ascii mode, fall is immediate
+  //
+  if (g_opt_ascii) {
+    duration = 0;
+  } else {
+    if (is_offscreen) {
+      duration = 0;
+    }
+
+    //
+    // Check the number of things jumping is not slowing the game too much
+    //
+    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
+      duration /= 4;
+    }
   }
 
   auto t = ts_fall_begin_set(time_ms_cached());
-  ts_fall_end_set(t + ms);
+  ts_fall_end_set(t + duration);
 
   fall_height_set(fall_height);
 
@@ -108,6 +129,8 @@ void Thing::fall(float fall_height, ts_t ms)
   if (is_player() || is_monst() || is_item()) {
     wobble(360);
   }
+
+  return true;
 }
 
 float Thing::fall_curr(void)

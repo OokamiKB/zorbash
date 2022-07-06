@@ -155,8 +155,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
               }
 
               //
-              // Not sure why closing a door would fail, but I don't think we should
-              // fall through to attack.
+              // Not sure why closing a door would fail, but I don't think we should fall through to attack.
               //
               return true;
             }

@@ -411,7 +411,7 @@ void Level::tick_(void)
       auto equip_id = t->equip_id_use_anim(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
-        if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
+        if (w && ! (w->is_dead || w->is_scheduled_for_death || w->is_offscreen)) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
             w->con("Waiting on this");
             t->con("This is the owner");

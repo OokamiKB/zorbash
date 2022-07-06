@@ -111,7 +111,7 @@ void Level::update_things_next_to_a_chasm(void)
 
                 if (t->is_shallow_water() || t->is_deep_water() || t->is_lava()) {
                   t->log("Over a chasm");
-                  t->fall(1, 750);
+                  t->fall();
                 }
               }
               FOR_ALL_THINGS_END()

@@ -2229,7 +2229,6 @@ public:
   void fadeup_fade_set(float);
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
   void fadeup_height_set(float);
-  void fall(float fall_height, ts_t ms);
   void fall_height_set(float);
   void fall_into_the_void(void);
   void gas_poison_tick(void);

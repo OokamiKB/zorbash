@@ -303,7 +303,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     duration = 0;
   } else {
     if (is_offscreen) {
-      duration /= 4;
+      duration = 0;
     }
 
     //
