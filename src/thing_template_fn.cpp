@@ -105,6 +105,7 @@ const std::string &Tp::on_stuck_do(void) const { return _on_stuck_do; }
 const std::string &Tp::on_swing_do(void) const { return _on_swing_do; }
 const std::string &Tp::on_teleport_do(void) const { return _on_teleport_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
+const std::string &Tp::on_get_description_do(void) const { return _on_get_description_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
 const std::string &Tp::on_waiting_do(void) const { return _on_waiting_do; }
@@ -1175,6 +1176,7 @@ void Tp::on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
 void Tp::on_swing_do_set(const std::string &v) { _on_swing_do = v; }
 void Tp::on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
 void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
+void Tp::on_get_description_do_set(const std::string &v) { _on_get_description_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
 void Tp::on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }

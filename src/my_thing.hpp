@@ -544,6 +544,9 @@ public:
   bool on_fire_set(const std::string &why);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
+
+  std::list< std::string > on_get_description(void);
+
   bool open_door(Thingp door);
   bool open(Thingp it);
   bool open(void);
@@ -813,6 +816,7 @@ public:
   const std::string &on_swing_do(void);
   const std::string &on_teleport_do(void);
   const std::string &on_tick_do(void);
+  const std::string &on_get_description_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
   const std::string &on_waiting_do(void);

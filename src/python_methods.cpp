@@ -1532,6 +1532,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_swing_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_teleport_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_tick_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_get_description_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_unequip_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_use_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_waiting_do),

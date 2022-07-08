@@ -9,6 +9,8 @@
 
 #include "my_point.hpp"
 #include <Python.h>
+#include <list>
+#include <string>
 
 PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -48,7 +50,7 @@ int py_obj_to_int(PyObject *py_obj);
 
 PyMODINIT_FUNC py_my_module_create(void);
 
-std::string py_obj_to_stringing(const PyObject *py_str);
+std::string py_obj_to_std_string(const PyObject *py_str);
 
 uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
 uint64_t py_obj_to_uint64(PyObject *py_obj);
@@ -95,6 +97,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsi
 void py_call_void_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
                      unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8,
                      unsigned int v9, unsigned int v10);
+
 bool py_call_bool(const char *name);
 bool py_call_bool_fn(const char *module, const char *name, int v1);
 bool py_call_bool_fn(const char *module, const char *name, int v1, int v2);
@@ -118,29 +121,33 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int v1, unsi
                      unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7);
 bool py_call_bool_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
                      unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
-int  py_call_int(const char *name);
-int  py_call_int_fn(const char *module, const char *name, int v1);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7);
-int  py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7,
-                    int v8);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                    unsigned int v4);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                    unsigned int v4, unsigned int v5);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                    unsigned int v4, unsigned int v5, unsigned int v6);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                    unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7);
-int  py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
-                    unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
+
+int py_call_int(const char *name);
+int py_call_int_fn(const char *module, const char *name, int v1);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7);
+int py_call_int_fn(const char *module, const char *name, int v1, int v2, int v3, int v4, int v5, int v6, int v7,
+                   int v8);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                   unsigned int v4);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                   unsigned int v4, unsigned int v5);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                   unsigned int v4, unsigned int v5, unsigned int v6);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                   unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7);
+int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsigned int v2, unsigned int v3,
+                   unsigned int v4, unsigned int v5, unsigned int v6, unsigned int v7, unsigned int v8);
+
+std::list< std::string > py_call_std_list_string_fn(const char *module, const char *name, int val1, int val2,
+                                                    int val3, int val4);
 
 #define PY_PROTO(__fn__) PyObject *__fn__##_(PyObject *obj, PyObject *args, PyObject *keywds);
 

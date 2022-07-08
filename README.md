@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- spider web spawn small spiders?                                                                                                              -->
+<!-- dungeon entrance description on level 1                                                                                                      -->
 <!-- stone cloak makes ascii walls vanish                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

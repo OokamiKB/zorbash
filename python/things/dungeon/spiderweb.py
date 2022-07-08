@@ -29,6 +29,7 @@ def tp_init(name, tiles=[]):
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "Free real estate. All welcome, says a small sign next to this web.")
+    my.text_long_description2(self, "Best to try and jump over such obstacles.")
     my.text_short_description(self, "Thick and sticky spiderweb.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

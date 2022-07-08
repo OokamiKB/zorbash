@@ -38,7 +38,7 @@ void py_call_void(const char *name)
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s", name);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -61,7 +61,7 @@ void py_call_void_fn(const char *module, const char *name, int val1)
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -84,7 +84,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2)
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -107,7 +107,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -130,7 +130,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -153,7 +153,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -176,7 +176,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -200,7 +200,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -224,7 +224,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -248,7 +248,7 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -271,7 +271,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1)
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -294,7 +294,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -317,7 +317,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -341,7 +341,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -365,7 +365,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -389,7 +389,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -413,7 +413,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -437,7 +437,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -462,7 +462,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -487,7 +487,7 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
       Py_DECREF(pValue);
     }
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -512,7 +512,7 @@ bool py_call_bool(const char *name)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s", name);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -540,7 +540,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -568,7 +568,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -596,7 +596,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -624,7 +624,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -652,7 +652,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -680,7 +680,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -709,7 +709,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -738,7 +738,7 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -766,7 +766,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -794,7 +794,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -822,7 +822,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -851,7 +851,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -880,7 +880,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -909,7 +909,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -938,7 +938,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -967,7 +967,7 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -993,7 +993,7 @@ int py_call_int(const char *name)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s", name);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1021,7 +1021,7 @@ int py_call_int_fn(const char *module, const char *name, int val1)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1049,7 +1049,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1077,7 +1077,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1105,7 +1105,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1133,7 +1133,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1161,7 +1161,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1190,7 +1190,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1219,7 +1219,7 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1247,7 +1247,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1)
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1275,7 +1275,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1303,7 +1303,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1332,7 +1332,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1361,7 +1361,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1390,7 +1390,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1419,7 +1419,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1448,7 +1448,7 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
     py_err();
     return out;
   } else {
-    ERR("Cannot call python function %s(%d)", name, val1);
+    ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -1491,7 +1491,7 @@ err_out:
   return (outstr);
 }
 
-std::string py_obj_to_stringing(const PyObject *py_str)
+std::string py_obj_to_std_string(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
   PyObject   *py_encstr;
@@ -1953,4 +1953,39 @@ PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds)
   y *= (double) TERM_HEIGHT;
 
   return (Py_BuildValue("dd", x, y));
+}
+
+std::list< std::string > py_call_std_list_string_fn(const char *module, const char *name, int val1, int val2,
+                                                    int val3, int val4)
+{
+  std::list< std::string > out;
+
+  TRACE_AND_INDENT();
+  auto pmod = py_add_module(module);
+  if (! pmod) {
+    return out;
+  }
+
+  PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+  if (PyCallable_Check(pFunc)) {
+    auto *pArgs  = Py_BuildValue("(iiii)", val1, val2, val3, val4);
+    auto *pValue = PyObject_CallObject(pFunc, pArgs);
+    Py_DECREF(pArgs);
+
+    for (auto i = 0; i < PyList_Size(pValue); i++) {
+      auto py_item = PyList_GetItem(pValue, i);
+      if (PyUnicode_Check(py_item)) {
+        auto item = py_obj_to_std_string(py_item);
+        out.push_back(item);
+      }
+
+      Py_DECREF(pValue);
+      py_err();
+    }
+  } else {
+    ERR("Cannot call python function: %s", name);
+  }
+
+  py_err();
+  return out;
 }
