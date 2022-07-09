@@ -21,6 +21,9 @@ point Thing::dest_random_get(int d)
     }
   }
 
+  TRACE_AND_INDENT();
+  dbg("Get random target, dist %d", d);
+
   auto  tries         = 100;
   point wander_source = curr_at;
 

@@ -456,8 +456,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Take pity on the player getting close to the dark
     //
-    if (player && (player->torch_count() < 3))
-      place_random_torches(dungeon);
+    place_random_torches(dungeon);
     if (g_errored) {
       return false;
     }

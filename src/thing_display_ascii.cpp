@@ -275,8 +275,8 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   //
   bool shown_in_bg = gfx_ascii_shown_in_bg();
 
-  IF_DEBUG2 { shown_in_bg = true; }
-  IF_DEBUG2 { lit = true; }
+  // IF_DEBUG2 { shown_in_bg = true; }
+  // IF_DEBUG2 { lit = true; }
 
   if (gfx_ascii_shown()) {
     if (lit) {
