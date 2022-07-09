@@ -545,7 +545,7 @@ public:
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
 
-  std::list< std::string > on_get_description(void);
+  std::vector< std::string > on_get_description(void);
 
   bool open_door(Thingp door);
   bool open(Thingp it);
@@ -693,6 +693,7 @@ public:
   const std::string damage_cold_dice_str(void);
   const std::string damage_crush_dice_str(void);
   const std::string damage_digest_dice_str(void);
+  const std::string damage_draining_dice_str(void);
   const std::string damage_energy_dice_str(void);
   const std::string damage_fire_dice_str(void);
   const std::string damage_future1_dice_str(void);
@@ -702,9 +703,11 @@ public:
   const std::string damage_melee_dice_str(void);
   const std::string damage_natural_dice_str(void);
   const std::string damage_necrosis_dice_str(void);
-  const std::string damage_draining_dice_str(void);
   const std::string damage_poison_dice_str(void);
   const std::string danger_level_str(Thingp); // Cannot return reference
+  const std::string text_long_description2(void);
+  const std::string text_long_description3(void);
+  const std::string text_long_description(void);
 
   const std::string &damage_nat_att_type(void);
   const std::string &dead_reason_get(void);
@@ -715,9 +718,6 @@ public:
   const std::string &is_allied_with(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
-  const std::string &text_long_description2(void);
-  const std::string &text_long_description3(void);
-  const std::string &text_long_description(void);
   const std::string &msg_get(void);
   const std::string &name(void);
   const std::string &nutrition_dice_str(void);
@@ -749,6 +749,7 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
+  const std::string &on_get_description_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_jump_do(void);
   const std::string &on_lifespan_tick_do(void);
@@ -816,7 +817,6 @@ public:
   const std::string &on_swing_do(void);
   const std::string &on_teleport_do(void);
   const std::string &on_tick_do(void);
-  const std::string &on_get_description_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
   const std::string &on_waiting_do(void);
@@ -829,7 +829,6 @@ public:
   const std::string &on_you_nat_att_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
-  const std::string &text_short_name(void);
   const std::string &spawn_group_size_dice_str(void);
   const std::string &spawn_on_shoved(void);
   const std::string &str1(void);
@@ -839,10 +838,11 @@ public:
   const std::string &target_name_projectile(void);
   const std::string &target_name_radial(void);
   const std::string &text_debuff(void);
-  const std::string &text_short_description(void);
   const std::string &text_enchant(void);
   const std::string &text_hits(void);
   const std::string &text_long_name(void);
+  const std::string &text_short_description(void);
+  const std::string &text_short_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
   const std::string &text_unused1(void);

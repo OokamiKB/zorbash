@@ -105,7 +105,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
-  if (tp->text_long_description().empty()) {
+  if (t->text_long_description().empty()) {
     IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
     wid_thing_info_fini("has no text");
     t->show_botcon_description();
@@ -161,14 +161,14 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   if (t->is_dead) {
     wid_popup_window->log("It's dead, Jim");
   } else {
-    wid_popup_window->log(tp->text_long_description(), TEXT_FORMAT_LHS, "pink");
+    wid_popup_window->log(t->text_long_description(), TEXT_FORMAT_LHS, "pink");
 
-    if (! tp->text_long_description2().empty()) {
-      wid_popup_window->log(tp->text_long_description2(), TEXT_FORMAT_LHS, "yellow");
+    if (! t->text_long_description2().empty()) {
+      wid_popup_window->log(t->text_long_description2(), TEXT_FORMAT_LHS, "yellow");
     }
 
-    if (! tp->text_long_description3().empty()) {
-      wid_popup_window->log(tp->text_long_description3(), TEXT_FORMAT_LHS, "orange");
+    if (! t->text_long_description3().empty()) {
+      wid_popup_window->log(t->text_long_description3(), TEXT_FORMAT_LHS, "orange");
     }
 
     wid_thing_info_add_general_info(wid_popup_window, t);

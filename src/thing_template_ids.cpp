@@ -124,7 +124,7 @@ std::initializer_list< std::string > tps = {
     "laser_descent",
     "effect_descent_radial",
     "enchantstone",
-    "entrance",
+    "ascend_dungeon",
     "exit1",
     "explosion_cold",
     "explosion_destroy_floor",

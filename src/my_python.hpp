@@ -149,6 +149,9 @@ int py_call_int_fn(const char *module, const char *name, unsigned int v1, unsign
 std::list< std::string > py_call_std_list_string_fn(const char *module, const char *name, int val1, int val2,
                                                     int val3, int val4);
 
+std::vector< std::string > py_call_std_vector_string_fn(const char *module, const char *name, int val1, int val2,
+                                                        int val3, int val4);
+
 #define PY_PROTO(__fn__) PyObject *__fn__##_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define PY_DECL(__fn__) {#__fn__, (PyCFunction) __fn__##_, METH_VARARGS | METH_KEYWORDS, "call " #__fn__ " "},

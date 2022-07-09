@@ -3,7 +3,7 @@ import tp
 
 
 def on_get_description(owner, me, x, y):
-    return ["a", "b"]
+    return ["This imposing doorway leads up to the previous level."]
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -29,7 +29,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
-    my.text_long_description(self, "This imposing doorway leads up to the previous level.")
     my.text_short_description(self, "%%fg=gold$The way up.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -84,7 +83,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="entrance", text_long_name="dungeon entrance", text_short_name="entrance")
+    tp_init(name="ascend_dungeon", text_long_name="dungeon entrance", text_short_name="entrance")
 
 
 init()

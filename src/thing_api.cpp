@@ -5888,24 +5888,6 @@ const std::string &Thing::target_name_radial(void)
   return (tp()->target_name_radial());
 }
 
-const std::string &Thing::text_long_description(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_long_description());
-}
-
-const std::string &Thing::text_long_description2(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_long_description2());
-}
-
-const std::string &Thing::text_long_description3(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_long_description3());
-}
-
 const std::string &Thing::text_unused1(void)
 {
   TRACE_NO_INDENT();
@@ -6044,12 +6026,6 @@ const std::string &Thing::on_tick_do(void)
   return (tp()->on_tick_do());
 }
 
-const std::string &Thing::on_get_description_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_get_description_do());
-}
-
 const std::string &Thing::on_use_do(void)
 {
   TRACE_NO_INDENT();
@@ -6156,12 +6132,6 @@ const std::string &Thing::is_allied_with(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_allied_with());
-}
-
-const std::string &Thing::text_short_description(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->text_short_description());
 }
 
 const std::string &Thing::text_enchant(void)
