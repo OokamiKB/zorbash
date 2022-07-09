@@ -502,7 +502,6 @@ public:
   }                                                                                                                  \
   }                                                                                                                  \
   level->animated_things_walk_in_progress = false;                                                                   \
-  level->handle_all_pending_things();                                                                                \
   }
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \

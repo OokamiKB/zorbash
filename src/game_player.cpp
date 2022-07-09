@@ -122,7 +122,7 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("cloak_stone", point(x, y));
         t->carry(w);
       }
