@@ -3,7 +3,12 @@ import tp
 
 
 def on_get_text_long_description(owner, me, x, y):
-    return ["This imposing doorway leads up to the previous level."]
+    if my.thing_level_get(me) == 1:
+        return ["This imposing doorway leads back to freedom from the terrible dungeon you find yourself in.",
+                "Why are you here? Good question. Something involving a bet, copious amounts of liquid, seven ferrets and an ungodly desire to rid the world of a terrible evil of some kind.",
+                "The door will likely remain barred until you return here with the Orb of Zorb..."]
+    else:
+        return ["This imposing doorway leads up to the previous level."]
 
 
 def tp_init(name, text_long_name, text_short_name):
