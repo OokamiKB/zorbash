@@ -448,19 +448,17 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
     if (path_pop_next_move(reason)) {
       dbg("Move to cursor next hop");
       if (game->cursor_move_path.empty()) {
-        level->cursor_path_create();
+        level->cursor_path_create(this);
       }
       return true;
     }
 
     //
-    // We get here if for example we click on a monster but
-    // are unable to move into its cell because it blocks
-    //
+    // We get here if for example we click on a monster but are unable to move into its cell because it blocks
     // Or we click on a locked door and cannot pass through.
     //
     dbg("Failed to move to cursor next hop");
-    level->cursor_path_create();
+    level->cursor_path_create(this);
     return false;
   }
 
@@ -470,15 +468,26 @@ bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
   point future_pos = make_point(cursor->curr_at.x, cursor->curr_at.y);
 
   //
-  // If adjacent, try to move there. There may be no path
-  // because perhaps a monster just moved but now we can
+  // If adjacent, try to move there. There may be no path because perhaps a monster just moved but now we can
   // step there.
   //
   if ((fabs(future_pos.x - curr_at.x) <= 1) && (fabs(future_pos.y - curr_at.y) <= 1)) {
     dbg("Target is adjacent, attack or move to %d,%d", cursor->curr_at.x, cursor->curr_at.y);
+
+    //
+    // If we are able to walk through walls, then don't attack the wall, move into it.
+    //
+    if (is_able_to_walk_through_walls()) {
+      if (level->is_obs_wall_or_door(future_pos.x, future_pos.y)) {
+        move(cursor->curr_at);
+        level->cursor_path_create(this);
+        return true;
+      }
+    }
+
     if (possible_to_attack_at(future_pos)) {
       attack(cursor->curr_at);
-      level->cursor_path_create();
+      level->cursor_path_create(this);
       return true;
     }
   }

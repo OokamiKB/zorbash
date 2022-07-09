@@ -161,7 +161,7 @@ void Level::cursor_recreate(void)
     return;
   }
 
-  if (player && player->is_dead) {
+  if (player->is_dead) {
     return;
   }
 
@@ -207,5 +207,5 @@ void Level::cursor_recreate(void)
   // the cursor pop up,
   //
   // cursor->hide();
-  cursor_path_create();
+  cursor_path_create(player);
 }

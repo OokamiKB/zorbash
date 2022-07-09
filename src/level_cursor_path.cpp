@@ -87,7 +87,7 @@ void Level::cursor_path_draw_circle(void)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw_line(point start, point end)
+void Level::cursor_path_draw_line(Thingp it, point start, point end)
 {
   dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
@@ -138,7 +138,7 @@ void Level::cursor_path_draw_line(point start, point end)
   //
   // If clicking on a wall, don't walk into it.
   //
-  if (cursor && is_cursor_path_blocker(cursor->curr_at.x, cursor->curr_at.y)) {
+  if (cursor && is_cursor_path_blocker(it, cursor->curr_at.x, cursor->curr_at.y)) {
     return;
   }
 
@@ -153,7 +153,7 @@ void Level::cursor_path_draw_line(point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_cursor_path_blocker(x, y)) {
+        if (is_cursor_path_blocker(it, x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -163,7 +163,7 @@ void Level::cursor_path_draw_line(point start, point end)
   } else {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_cursor_path_blocker(x, y) || is_cursor_path_hazard(x, y)) {
+        if (is_cursor_path_blocker(it, x, y) || is_cursor_path_hazard(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -199,7 +199,7 @@ void Level::cursor_path_draw_line(point start, point end)
   }
 }
 
-void Level::cursor_path_draw_line(const std::vector< point > &move_path)
+void Level::cursor_path_draw_line(Thingp it, const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
 
@@ -220,7 +220,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw(point start, point end)
+void Level::cursor_path_draw(Thingp it, point start, point end)
 {
   dbg("Create cursor draw %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
@@ -242,7 +242,7 @@ void Level::cursor_path_draw(point start, point end)
       cursor_path_draw_circle();
     }
   } else {
-    cursor_path_draw_line(start, end);
+    cursor_path_draw_line(it, start, end);
   }
 
   //
@@ -251,7 +251,7 @@ void Level::cursor_path_draw(point start, point end)
   is_map_mini_valid = false;
 }
 
-void Level::cursor_path_draw(const std::vector< point > &move_path)
+void Level::cursor_path_draw(Thingp it, const std::vector< point > &move_path)
 {
   dbg("Create cursor move path");
   TRACE_AND_INDENT();
@@ -260,7 +260,7 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
     return;
   }
 
-  cursor_path_draw_line(move_path);
+  cursor_path_draw_line(it, move_path);
 
   //
   // Let's see the path
@@ -271,7 +271,7 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
 //
 // Create the cursor path, avoiding things like lava
 //
-void Level::cursor_path_draw(void)
+void Level::cursor_path_draw(Thingp it)
 {
   TRACE_AND_INDENT();
 
@@ -293,7 +293,7 @@ void Level::cursor_path_draw(void)
 // Using a dmap, solve the path to where the cursor is, creating a highlighted
 // path to follow.
 //
-void Level::cursor_path_create(void)
+void Level::cursor_path_create(Thingp it)
 {
   TRACE_AND_INDENT();
 
@@ -338,10 +338,10 @@ void Level::cursor_path_create(void)
   //
   // If not following the player, draw the path
   //
-  cursor_path_draw(point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
+  cursor_path_draw(it, point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
 }
 
-void Level::cursor_path_create(const std::vector< point > &move_path)
+void Level::cursor_path_create(Thingp it, const std::vector< point > &move_path)
 {
   dbg("Create cursor path len %d", (int) move_path.size());
   TRACE_AND_INDENT();
@@ -351,7 +351,7 @@ void Level::cursor_path_create(const std::vector< point > &move_path)
   //
   // If not following the player, draw the path
   //
-  cursor_path_draw(move_path);
+  cursor_path_draw(it, move_path);
 }
 
 //
@@ -421,21 +421,22 @@ void Level::is_cursor_path_hazard_unset(const int x, const int y)
   decr(_is_cursor_path_hazard, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_cursor_path_blocker(const point p)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_cursor_path_blocker, p.x, p.y));
-}
+uint8_t Level::is_cursor_path_blocker(Thingp it, const point p) { return is_cursor_path_blocker(it, p.x, p.y); }
 
-uint8_t Level::is_cursor_path_blocker(const int x, const int y)
+uint8_t Level::is_cursor_path_blocker(Thingp it, const int x, const int y)
 {
   TRACE_NO_INDENT();
+
   if (unlikely(is_oob(x, y))) {
-    return false;
+    return true;
   }
+
+  if (it && it->is_able_to_walk_through_walls()) {
+    if (is_obs_wall_or_door(x, y)) {
+      return false;
+    }
+  }
+
   return (get(_is_cursor_path_blocker, x, y));
 }
 

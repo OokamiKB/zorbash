@@ -358,7 +358,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     AI_LOG(goal_path_str);
 
     if (is_player()) {
-      level->cursor_path_create(new_move_path);
+      level->cursor_path_create(this, new_move_path);
       IF_DEBUG3 { level->debug_path_create(new_move_path); }
 
       //
