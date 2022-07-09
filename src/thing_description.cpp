@@ -12,16 +12,16 @@
 //
 // Python callback upon being tick
 //
-std::vector< std::string > Thing::on_get_description(void)
+std::vector< std::string > Thing::on_get_text_long_description(void)
 {
   std::vector< std::string > out;
 
-  auto on_get_description = tp()->on_get_description_do();
-  if (std::empty(on_get_description)) {
+  auto on_get_text_long_description = tp()->on_get_text_long_description_do();
+  if (std::empty(on_get_text_long_description)) {
     return out;
   }
 
-  auto t = split_tokens(on_get_description, '.');
+  auto t = split_tokens(on_get_text_long_description, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -41,16 +41,16 @@ std::vector< std::string > Thing::on_get_description(void)
                                         (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   }
 
-  ERR("Bad on_get_description call [%s] expected mod:function, got %d elems", on_get_description.c_str(),
-      (int) on_get_description.size());
+  ERR("Bad on_get_text_long_description call [%s] expected mod:function, got %d elems",
+      on_get_text_long_description.c_str(), (int) on_get_text_long_description.size());
 
   return out;
 }
 
-const std::string &Thing::on_get_description_do(void)
+const std::string &Thing::on_get_text_long_description_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_get_description_do());
+  return (tp()->on_get_text_long_description_do());
 }
 
 const std::string Thing::text_long_description(void)
@@ -60,9 +60,9 @@ const std::string Thing::text_long_description(void)
   //
   // If python overrides, return that string
   //
-  auto override_description = on_get_description_do();
+  auto override_description = on_get_text_long_description_do();
   if (! std::empty(override_description)) {
-    auto d = on_get_description();
+    auto d = on_get_text_long_description();
     if (d.size()) {
       return d[ 0 ];
     }
@@ -78,9 +78,9 @@ const std::string Thing::text_long_description2(void)
   //
   // If python overrides, return that string
   //
-  auto uon_get_description = on_get_description_do();
-  if (! std::empty(uon_get_description)) {
-    auto d = on_get_description();
+  auto override_description = on_get_text_long_description_do();
+  if (! std::empty(override_description)) {
+    auto d = on_get_text_long_description();
     if (d.size() > 1) {
       return d[ 1 ];
     }
@@ -96,9 +96,9 @@ const std::string Thing::text_long_description3(void)
   //
   // If python overrides, return that string
   //
-  auto uon_get_description = on_get_description_do();
-  if (! std::empty(uon_get_description)) {
-    auto d = on_get_description();
+  auto override_description = on_get_text_long_description_do();
+  if (! std::empty(override_description)) {
+    auto d = on_get_text_long_description();
     if (d.size() > 2) {
       return d[ 2 ];
     }

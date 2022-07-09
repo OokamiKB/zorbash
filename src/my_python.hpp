@@ -12,7 +12,6 @@
 #include <list>
 #include <string>
 
-PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -23,7 +22,6 @@ PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *puts_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *py_add_module(const char *mod);
 PyObject *py_obj_attr(const PyObject *py_str, const char *attr);

@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_get_description(owner, me, x, y):
+def on_get_text_long_description(owner, me, x, y):
     return ["This imposing doorway leads up to the previous level."]
 
 
@@ -14,7 +14,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
-    my.on_get_description_do(self, "me.on_get_description()")
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_show_outlined(self, True)
@@ -28,6 +27,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
+    my.on_get_text_long_description_do(self, "me.on_get_text_long_description()")
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "%%fg=gold$The way up.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

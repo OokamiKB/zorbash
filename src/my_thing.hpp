@@ -545,7 +545,7 @@ public:
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
 
-  std::vector< std::string > on_get_description(void);
+  std::vector< std::string > on_get_text_long_description(void);
 
   bool open_door(Thingp door);
   bool open(Thingp it);
@@ -749,7 +749,7 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
-  const std::string &on_get_description_do(void);
+  const std::string &on_get_text_long_description_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_jump_do(void);
   const std::string &on_lifespan_tick_do(void);
@@ -1442,6 +1442,7 @@ public:
   int keys_incr(void);
   int keys_set(int);
   int keys(void);
+  int level_get(void);
   int lifespan_decr(int);
   int lifespan_decr(void);
   int lifespan_get(void);

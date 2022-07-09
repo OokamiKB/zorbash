@@ -763,7 +763,7 @@ private:
   std::string _on_swing_do;
   std::string _on_teleport_do;
   std::string _on_tick_do;
-  std::string _on_get_description_do;
+  std::string _on_get_text_long_description_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
@@ -1049,7 +1049,7 @@ public:
   const std::string &on_swing_do(void) const;
   const std::string &on_teleport_do(void) const;
   const std::string &on_tick_do(void) const;
-  const std::string &on_get_description_do(void) const;
+  const std::string &on_get_text_long_description_do(void) const;
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
   const std::string &on_waiting_do(void) const;
@@ -2127,7 +2127,7 @@ public:
   void on_swing_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
-  void on_get_description_do_set(const std::string &v);
+  void on_get_text_long_description_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
   void on_waiting_do_set(const std::string &v);

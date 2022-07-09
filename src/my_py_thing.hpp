@@ -57,6 +57,7 @@ PyObject *thing_distance_minion_vision_shared_get(PyObject *obj, PyObject *args,
 PyObject *thing_distance_recruitment_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_level_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max_current_decr(PyObject *obj, PyObject *args, PyObject *keywds);
