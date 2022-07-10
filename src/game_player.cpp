@@ -47,6 +47,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
+        auto w = level->thing_new("armor_lather", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w);
       }
@@ -142,7 +146,7 @@ void Game::place_player(void)
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b);
       }
