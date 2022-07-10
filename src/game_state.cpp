@@ -38,6 +38,7 @@ static std::string state_to_string(int state)
 
 void Game::change_state(int new_state)
 {
+  backtrace_dump();
   //
   // Check we are in the game loop. If not, do the reset later.
   //

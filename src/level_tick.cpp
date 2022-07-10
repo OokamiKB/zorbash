@@ -623,6 +623,7 @@ void Level::tick_(void)
       if (game->robot_mode_tick_requested) {
         dbg("Robot: tick requested");
         TRACE_AND_INDENT();
+
         game->robot_mode_tick_requested = false;
         if (game->robot_mode) {
           player->ai_tick();
@@ -632,18 +633,8 @@ void Level::tick_(void)
       }
 
       if (game->tick_requested.empty()) {
-        dbg("Robot: no tick requested");
-        TRACE_AND_INDENT();
-
-        //
-        // We can get stuck with timing with the inventory open. So make sure we close it.
-        //
-        if (game->state != Game::STATE_NORMAL) {
-          dbg("Robot: reset to normal state");
-          player->change_state(MONST_STATE_IDLE, "reset to normal state");
-        }
-
         dbg("Robot: no new tick was requested, so tick anyway");
+        TRACE_AND_INDENT();
         game->robot_mode_tick();
       } else {
         dbg("Robot: a new tick was requested");
