@@ -62,15 +62,16 @@ void Game::tick_begin_now(void)
   if (level) {
     auto player = level->player;
     if (player) {
-      CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      LOG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           player->to_string().c_str());
     } else {
-      CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      LOG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           level->to_string().c_str());
     }
   } else {
-    CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
+    LOG("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
+
   TRACE_AND_INDENT();
 
   game->tick_begin_ms      = time_ms();
@@ -139,18 +140,18 @@ bool Game::tick_end(void)
   if (level) {
     auto player = level->player;
     if (player) {
-      CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+      LOG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
           time_ms() - game->tick_begin_ms, player->to_string().c_str());
     } else {
-      CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+      LOG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
           time_ms() - game->tick_begin_ms, level->to_string().c_str());
     }
   } else {
-    CON("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
+    LOG("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
         time_ms() - game->tick_begin_ms);
   }
 
-  CON("-");
+  LOG("-");
 
   if (level) {
     level->update();
