@@ -210,13 +210,13 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (defeater && defeater->is_water()) {
           msg("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          msg("%%fg=red$RIP: Robot is falls to pieces, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is torn apart %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          msg("%%fg=red$RIP: Robot is consumed, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          msg("%%fg=red$RIP: Robot is disassembled, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
         } else {
-          msg("%%fg=red$RIP: Robot is deactivated, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
         }
       } else {
         if (defeater && defeater->is_acid()) {
@@ -306,9 +306,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           //
           if (is_monst()) {
             if (is_undead()) {
-              msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_jelly()) {
-              msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
               msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
@@ -319,7 +319,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else if (top_owner() == defeater) {
             msg("Your %s is destroyed.", text_short_name().c_str());
           } else {
-            msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
+            msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
 
           defeater->score_add(this);
@@ -330,9 +330,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           //
           if (is_monst()) {
             if (is_undead()) {
-              msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is vanquished %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_jelly()) {
-              msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is splattered %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
               msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
@@ -341,7 +341,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else if (top_owner() == defeater) {
             msg("%s's %s is destroyed.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
           } else {
-            msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
+            msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
         } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {

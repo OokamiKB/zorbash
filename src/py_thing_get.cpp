@@ -10,7 +10,7 @@
 #define THING_BODY_GET_INT(__func__, __api__)                                                                        \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \
-    TRACE_AND_INDENT();                                                                                              \
+    TRACE_NO_INDENT();                                                                                               \
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
@@ -32,7 +32,7 @@
 #define THING_BODY_GET_STRING(__func__, __api__)                                                                     \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \
-    TRACE_AND_INDENT();                                                                                              \
+    TRACE_NO_INDENT();                                                                                               \
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
@@ -54,7 +54,7 @@
 #define THING_BODY_GET_THING(__func__, __api__)                                                                      \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \
-    TRACE_AND_INDENT();                                                                                              \
+    TRACE_NO_INDENT();                                                                                               \
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \
@@ -81,7 +81,7 @@
 #define THING_BODY_GET_BOOL(__func__, __api__)                                                                       \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \
   {                                                                                                                  \
-    TRACE_AND_INDENT();                                                                                              \
+    TRACE_NO_INDENT();                                                                                               \
     uint32_t     id       = 0;                                                                                       \
     static char *kwlist[] = {(char *) "id", 0};                                                                      \
                                                                                                                      \

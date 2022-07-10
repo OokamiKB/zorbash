@@ -20,13 +20,11 @@
 //
 void Level::scroll_map_set_bounds(void)
 {
-  TRACE_AND_INDENT();
-
-  if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
-    map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
+  if (map_at.x > MAP_WIDTH - 1) {
+    map_at.x = MAP_WIDTH - 1;
   }
-  if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
-    map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
+  if (map_at.y > MAP_HEIGHT - 1) {
+    map_at.y = MAP_HEIGHT - 1;
   }
   if (map_at.x < 0) {
     map_at.x = 0;
@@ -35,11 +33,11 @@ void Level::scroll_map_set_bounds(void)
     map_at.y = 0;
   }
 
-  if (map_wanted_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
-    map_wanted_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
+  if (map_wanted_at.x > MAP_WIDTH - 1) {
+    map_wanted_at.x = MAP_WIDTH - 1;
   }
-  if (map_wanted_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
-    map_wanted_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+  if (map_wanted_at.y > MAP_HEIGHT - 1) {
+    map_wanted_at.y = MAP_HEIGHT - 1;
   }
   if (map_wanted_at.x < 0) {
     map_wanted_at.x = 0;
@@ -51,7 +49,7 @@ void Level::scroll_map_set_bounds(void)
 
 void Level::scroll_map_do(bool fast)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! fast) {
     //
@@ -205,7 +203,8 @@ if (player) {
 
 void Level::scroll_map(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (wid_find_under_mouse_when_scrolling()) {
     return;
   }
@@ -215,7 +214,8 @@ void Level::scroll_map(void)
 
 void Level::scroll_map_to_player(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! player) {
     return;
   }
@@ -238,7 +238,8 @@ void Level::scroll_map_to_player(void)
 
 void Level::scroll_map_to_player_immediately(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (! player) {
     return;
   }
@@ -271,7 +272,8 @@ void Level::scroll_map_to_player_immediately(void)
 //
 void Level::scroll_map_set_target(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   fpoint follow;
   float  sensitivity;
   float  x_sensitivity;

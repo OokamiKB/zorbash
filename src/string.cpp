@@ -37,7 +37,7 @@ std::string wstring_to_string(const std::wstring &s)
  */
 void strrepc(char *s, const char *replace_set, char replace_with)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *c;
 
   for (c = s; *c; c++) {
@@ -54,7 +54,7 @@ void strrepc(char *s, const char *replace_set, char replace_with)
  */
 #if 0
 static char *substr (const char *in, int pos, int len)
-{ TRACE_AND_INDENT();
+{ TRACE_NO_INDENT();
   int slen;
   char *out;
 
@@ -107,7 +107,7 @@ static char *substr (const char *in, int pos, int len)
 char *strsub_(const char *in, const char *look_for, const char *replace_with, const char *what, const char *file,
               const char *func, int line)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char       *buf;
   const char *at;
   int         newlen;
@@ -157,7 +157,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
  */
 char *strappend(const char *in, const char *append)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *buf;
   int   newlen;
   int   len;
@@ -186,7 +186,7 @@ char *strappend(const char *in, const char *append)
  */
 char *strprepend(const char *in, const char *prepend)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *buf;
   int   newlen;
   int   len;
@@ -213,7 +213,7 @@ char *strprepend(const char *in, const char *prepend)
  */
 uint32_t strcommon(const char *a, const char *b)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const char *o;
 
   o = a;
@@ -231,7 +231,7 @@ uint32_t strcommon(const char *a, const char *b)
  */
 void strchop(char *s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t size;
   char    *end;
 
@@ -253,7 +253,7 @@ void strchop(char *s)
  */
 void strchopc(char *s, char c)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t size;
   char    *end;
 
@@ -272,7 +272,7 @@ void strchopc(char *s, char c)
 
 int strisregexp(const char *in)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const char *a = in;
   char        c;
 
@@ -295,7 +295,7 @@ int strisregexp(const char *in)
 
 size_t strlcpy_(char *dst, const char *src, size_t max_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   size_t srclen = strlen(src);
   if (max_len > 0) {
     uint32_t len = std::min(srclen, max_len - 1);
@@ -307,7 +307,7 @@ size_t strlcpy_(char *dst, const char *src, size_t max_len)
 
 size_t strlcat_(char *dst, const char *src, size_t max_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t dstlen = strlen(dst);
   uint32_t srclen = strlen(src);
   if (dstlen < max_len) {
@@ -321,7 +321,7 @@ size_t strlcat_(char *dst, const char *src, size_t max_len)
  */
 void strnoescape(char *uncompressed)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *t = uncompressed;
   char *s = uncompressed;
   char  c;
@@ -362,7 +362,7 @@ void strnoescape(char *uncompressed)
 
 static const char *dynvprintf_(const char *fmt, va_list args)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static char buf[ MAXSTR ];
 
   buf[ 0 ] = '\0';
@@ -377,7 +377,7 @@ static const char *dynvprintf_(const char *fmt, va_list args)
  */
 char *dynprintf(const char *fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   const char *ret;
   va_list     args;
 
@@ -390,7 +390,7 @@ char *dynprintf(const char *fmt, ...)
 
 char *dynvprintf(const char *fmt, va_list args)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static char buf[ MAXSTR ];
 
   buf[ 0 ] = '\0';
@@ -406,7 +406,7 @@ char *dynvprintf(const char *fmt, va_list args)
  */
 std::string mybasename(const char *in, const char *who)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char       *tmp = dupstr(in, who);
   std::string tmp2(basename(tmp));
   myfree(tmp);
@@ -455,7 +455,7 @@ std::string mybasename(const char *in, const char *who)
  */
 char *strcasestr_(const char *s, const char *find)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char   c, sc;
   size_t len;
 
@@ -478,7 +478,7 @@ char *strcasestr_(const char *s, const char *find)
  */
 shared_vector_string split(const char *text, int max_line_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t           found_format_string;
   const char       *line_start;
   const char       *line_end;
@@ -624,7 +624,7 @@ shared_vector_string split(const char *text, int max_line_len)
 
 shared_vector_string split(const std::string &text, int max_line_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t found_format_string;
   int     line_len;
   char    c;
@@ -800,7 +800,7 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
 shared_vector_wstring split(const std::wstring &text, int max_line_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t found_format_string;
   int     line_len;
   char    c;
@@ -970,7 +970,7 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
 int length_without_format(const std::string &text)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t found_format_string;
   char    c;
   auto    text_start = text.begin();
@@ -1054,7 +1054,7 @@ int length_without_format(const std::string &text)
 
 int length_without_format(const std::wstring &text)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint8_t found_format_string;
   char    c;
   auto    text_start = text.begin();
@@ -1138,7 +1138,7 @@ int length_without_format(const std::wstring &text)
 
 Tpp string2tp(const char **s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static char        tmp[ MAXSHORTSTR ];
   static const char *eo_tmp = tmp + MAXSHORTSTR;
   const char        *c      = *s;
@@ -1170,7 +1170,7 @@ Tpp string2tp(const char **s)
 
 Tpp string2tp(const std::string &s, int *len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto        iter = s.begin();
   std::string out;
 
@@ -1204,7 +1204,7 @@ Tpp string2tp(const std::string &s, int *len)
 
 Tpp string2tp(const std::wstring &s, int *len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto v = wstring_to_string(s);
   return (string2tp(v, len));
 }
@@ -1222,7 +1222,7 @@ Tpp string2tp(const std::wstring &s, int *len)
  */
 int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int     freespace;
   int     needspace;
   int     usedspace;
