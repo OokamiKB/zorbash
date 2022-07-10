@@ -301,13 +301,16 @@ void Thing::killed(Thingp defeater, const char *reason)
       dbg("%s killed, %s", The_no_dying.c_str(), reason);
       if (defeater && (defeater != this)) {
         if (defeater->is_player()) {
+          //
+          // Killed by the player
+          //
           if (is_monst()) {
             if (is_undead()) {
               msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_jelly()) {
               msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
-              msg("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
           } else if (on_death_is_open()) {
             //
@@ -322,14 +325,16 @@ void Thing::killed(Thingp defeater, const char *reason)
           defeater->score_add(this);
         } else if (defeater->is_monst() && player->level &&
                    get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-
+          //
+          // Killed by a monster
+          //
           if (is_monst()) {
             if (is_undead()) {
               msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_jelly()) {
               msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
-              msg("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
           } else if (on_death_is_open()) {
             msg("%s opens the %s.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
