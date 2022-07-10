@@ -1236,7 +1236,7 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
-  {
+  if (game->state == Game::STATE_NORMAL) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar save");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
@@ -1248,7 +1248,7 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
-  {
+  if (game->state == Game::STATE_NORMAL) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar load");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
@@ -1384,7 +1384,15 @@ void wid_actionbar_ascii_init(void)
     ui_icon_close = true;
   }
 
-  int options = 7;
+  int options = 1;
+
+  if (game->state == Game::STATE_NORMAL) {
+    options = 8;
+  }
+
+  if (game->robot_mode) {
+    options = 2;
+  }
 
   if (ui_icon_collect) {
     options++;
@@ -1446,23 +1454,7 @@ void wid_actionbar_ascii_init(void)
     x_at += option_width + 1;
   }
 
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar config");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_configure);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$h%%fg=" UI_TEXT_COLOR_STR "$elp");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  {
+  if (game->state == Game::STATE_NORMAL) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar robot");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_height - 1);
@@ -1482,134 +1474,153 @@ void wid_actionbar_ascii_init(void)
     x_at += option_width + 1;
   }
 
-  if (! game->request_ascend && add_ascend) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_ascend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$<%%fg=" UI_TEXT_COLOR_STR "$Ascend");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
+  if (! game->robot_mode) {
+    if (! game->request_ascend && add_ascend) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_ascend);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$<%%fg=" UI_TEXT_COLOR_STR "$Ascend");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (! game->request_descend && add_descend) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_descend);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$>%%fg=" UI_TEXT_COLOR_STR "$Descend");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar save");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_save);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$s%%fg=" UI_TEXT_COLOR_STR "$ave");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar load");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_load);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$l%%fg=" UI_TEXT_COLOR_STR "$oad");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar inventory");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_inventory);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$i%%fg=" UI_TEXT_COLOR_STR "$nventory");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar wait");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_down(w, wid_actionbar_wait);
+      wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$.%%fg=" UI_TEXT_COLOR_STR "$ wait");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar collect");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_collect);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
+      wid_set_text(w, "collect");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (game->state == Game::STATE_NORMAL) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar config");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_configure);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$h%%fg=" UI_TEXT_COLOR_STR "$elp");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
+
+    if (ui_icon_close) {
+      auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
+      point tl = make_point(x_at, 0);
+      point br = make_point(x_at + option_width - 1, option_height - 1);
+      wid_set_pos(w, tl, br);
+      wid_set_on_mouse_up(w, wid_actionbar_close);
+      wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
+      wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
+      wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$ESC%%fg=" UI_TEXT_COLOR_STR "$ Close");
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
+      x_at += option_width + 1;
+    }
   }
 
-  if (! game->request_descend && add_descend) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_descend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$>%%fg=" UI_TEXT_COLOR_STR "$Descend");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar save");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_save);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$s%%fg=" UI_TEXT_COLOR_STR "$ave");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar load");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_load);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$l%%fg=" UI_TEXT_COLOR_STR "$oad");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar inventory");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_inventory);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$i%%fg=" UI_TEXT_COLOR_STR "$nventory");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar wait");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_down(w, wid_actionbar_wait);
-    wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$.%%fg=" UI_TEXT_COLOR_STR "$ wait");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  if (ui_icon_collect) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar collect");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_collect);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
-    wid_set_text(w, "collect");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
-
-  if (ui_icon_close) {
-    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar close");
-    point tl = make_point(x_at, 0);
-    point br = make_point(x_at + option_width - 1, option_height - 1);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$ESC%%fg=" UI_TEXT_COLOR_STR "$ Close");
-    wid_set_mode(w, WID_MODE_OVER);
-    wid_set_style(w, box_highlight_style);
-    wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_style(w, box_style);
-    x_at += option_width + 1;
-  }
   wid_update(wid_actionbar);
 }
 

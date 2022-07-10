@@ -189,17 +189,17 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   // better instead to just fade the colors with distance.
   //
   if (gfx_ascii_fade_with_dist()) {
-    float max_mag = level->player ? level->player->light_dist_get() : 1.0;
-    if (max_mag <= 0.1) {
-      max_mag = 0.1;
+    float light_dist = level->player ? level->player->light_dist_get() : 1.0;
+    if (light_dist <= 0.1) {
+      light_dist = 0.1;
     }
-    float mag = 1.0 - (((float) distance_to_player() - 1) / max_mag);
+    float brightness = 1.0 - (((float) distance_to_player() - 1) / light_dist);
 
-    IF_DEBUG2 { mag = 1.0; }
+    IF_DEBUG2 { brightness = 1.0; }
 
-    c.r = ((float) c.r) * mag;
-    c.g = ((float) c.g) * mag;
-    c.b = ((float) c.b) * mag;
+    c.r = ((float) c.r) * brightness;
+    c.g = ((float) c.g) * brightness;
+    c.b = ((float) c.b) * brightness;
   } else {
     //
     // Else combine the light sources, so we get a nice lava glow.
@@ -271,12 +271,11 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   const bool fg = true;
 
   //
-  // In debug mode, show all monstersj
+  // In debug mode, show all monsters
   //
   bool shown_in_bg = gfx_ascii_shown_in_bg();
 
-  // IF_DEBUG2 { shown_in_bg = true; }
-  // IF_DEBUG2 { lit = true; }
+  IF_DEBUG2 { shown_in_bg = true; }
 
   if (gfx_ascii_shown()) {
     if (lit) {
@@ -327,7 +326,19 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.g = ((int) (c.g / 5));
           c.b = ((int) (c.b / 2));
           c.a = tile->ascii_alpha;
+
+          //
+          // This allows us to see the unvisited areas when in debug mode in a different color
+          //
           blit_ascii_adjust_color(c, bg, left_bar);
+          IF_DEBUG2
+          {
+            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+              c.r = ((int) (c.r / 4));
+              c.g = c.r;
+              c.b = c.b;
+            }
+          }
           ascii_set_bg(p.x, p.y, c);
         }
 
@@ -342,6 +353,18 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           c.b = ((int) (c.b / 2));
           c.a = tile->ascii_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
+
+          //
+          // This allows us to see the unvisited areas when in debug mode in a different color
+          //
+          IF_DEBUG2
+          {
+            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+              c.r = ((int) (c.r / 4));
+              c.g = c.r;
+              c.b = c.b;
+            }
+          }
           ascii_set_bg(p.x, p.y, c);
         }
 
@@ -364,6 +387,18 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
             c.g = ((int) (c.g / 4));
             c.b = ((int) (c.b / 4));
             c.a = tile->ascii_alpha;
+          }
+
+          //
+          // This allows us to see the unvisited areas when in debug mode in a different color
+          //
+          IF_DEBUG2
+          {
+            if (! get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+              c.r = ((int) (c.r / 4));
+              c.g = c.r;
+              c.b = c.b;
+            }
           }
           ascii_set_fg(p.x, p.y, c);
         }

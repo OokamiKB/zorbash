@@ -1493,6 +1493,6 @@ void Game::wid_load_select(void)
   wid_update(wid_load->wid_text_area->wid_text_area);
 
   wid_progress_bar_destroy();
-  wid_actionbar_init();
   game->change_state(Game::STATE_LOAD_MENU);
+  wid_actionbar_init();
 }

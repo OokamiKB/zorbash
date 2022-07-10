@@ -1256,6 +1256,6 @@ void Game::wid_save_select(void)
   game_load_headers_only = false;
   wid_update(wid_save->wid_text_area->wid_text_area);
 
-  wid_actionbar_init();
   game->change_state(Game::STATE_SAVE_MENU);
+  wid_actionbar_init();
 }

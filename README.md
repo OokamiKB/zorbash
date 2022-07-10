@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- spider web spawn small spiders?                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -10,14 +9,9 @@
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- Accessibility                                                                                                                                -->
-<!-- ------                                                                                                                                       -->
-<!-- keyboard only mode                                                                                                                           -->
-<!-- keyboard only mode single hand i.e. no key combinations                                                                                      -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - boiling steam over water when fireball passes                                                                                              -->
 <!-- - dog pack / howling ?                                                                                                                       -->
