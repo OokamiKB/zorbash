@@ -1058,6 +1058,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
               real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                                hitter->text_the().c_str());
             }
+
+            if (game->robot_mode) {
+              BOTCON("Robot attacks %s.", text_the().c_str());
+            }
           } else {
             if (attack_options->attack_poison) {
               real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
@@ -1074,6 +1078,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
             } else {
               real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             }
+
+            if (game->robot_mode) {
+              BOTCON("Robot attacks %s.", text_the().c_str());
+            }
           }
         }
       } else if (is_item()) {
@@ -1086,6 +1094,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else {
           real_hitter->msg("You hit %s.", text_the().c_str());
         }
+
+        if (game->robot_mode) {
+          BOTCON("Robot attacks %s.", text_the().c_str());
+        }
       } else if (is_rock() || is_wall_dungeon()) {
         if (hitter->is_weapon()) {
           real_hitter->msg("You hit %s, why though?", text_the().c_str());
@@ -1096,6 +1108,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else {
           real_hitter->msg("You hit %s, why though?", text_the().c_str());
         }
+
+        if (game->robot_mode) {
+          BOTCON("Robot attacks %s.", text_the().c_str());
+        }
       } else {
         if (hitter->is_weapon()) {
           real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
@@ -1105,6 +1121,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else {
           real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+        }
+
+        if (game->robot_mode) {
+          BOTCON("Robot attacks %s.", text_the().c_str());
         }
       }
     } else {

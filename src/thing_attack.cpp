@@ -870,6 +870,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
 
       if (is_player() || (owner && owner->is_player())) {
         msg("You inflict no damage on %s.", victim->text_the().c_str());
+
+        if (game->robot_mode) {
+          BOTCON("Robot fails to damage %s.", victim->text_the().c_str());
+        }
       }
       dbg("Attack failed, no damage");
       return false;
@@ -968,6 +972,9 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
           if (is_player() || (owner && owner->is_player())) {
             msg("You miss %s.", victim->text_the().c_str());
             popup("You miss!");
+            if (game->robot_mode) {
+              BOTCON("Robot misses %s.", victim->text_the().c_str());
+            }
           } else if (victim->is_player()) {
             if (owner) {
               msg("%s misses you with %s.", owner->text_the().c_str(), text_the().c_str());
@@ -975,6 +982,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
               msg("%s misses you.", text_The().c_str());
             }
             popup("It misses you!");
+
+            if (game->robot_mode) {
+              BOTCON("%s misses the robot.", text_the().c_str());
+            }
           } else {
             dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
                 victim->to_string().c_str());
