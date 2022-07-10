@@ -11,6 +11,44 @@
 #include "my_wid.hpp"
 #include "my_wid_rightbar.hpp"
 
+//
+// Stop the map scrolling off the edges of the screen.
+//
+// If we did allow that then we need to clamp the FBO_PIXELART_FULLMAP* textures to avoid drawing negative
+// co-ordinates; and I can't be bothered fixing that; but also I think it's quite nice not to scroll too far
+// so the player knows the edges of the map.
+//
+void Level::scroll_map_set_bounds(void)
+{
+  TRACE_AND_INDENT();
+
+  if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
+    map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
+  }
+  if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
+    map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
+  }
+  if (map_at.x < 0) {
+    map_at.x = 0;
+  }
+  if (map_at.y < 0) {
+    map_at.y = 0;
+  }
+
+  if (map_wanted_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
+    map_wanted_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
+  }
+  if (map_wanted_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
+    map_wanted_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+  }
+  if (map_wanted_at.x < 0) {
+    map_wanted_at.x = 0;
+  }
+  if (map_wanted_at.y < 0) {
+    map_wanted_at.y = 0;
+  }
+}
+
 void Level::scroll_map_do(bool fast)
 {
   TRACE_AND_INDENT();
@@ -159,33 +197,10 @@ if (player) {
     map_at.y /= TILE_HEIGHT;
   }
 
-  if (g_opt_ascii) {
-    if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
-      map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
-    }
-    if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
-      map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
-    }
-    if (map_at.x < 0) {
-      map_at.x = 0;
-    }
-    if (map_at.y < 0) {
-      map_at.y = 0;
-    }
-  }
-
-  {
-    auto dx = map_at.x - map_wanted_at.x;
-    auto dy = map_at.y - map_wanted_at.y;
-
-    if (fabs(dx) < 0.1) {
-      dx = 0;
-    }
-
-    if (fabs(dy) < 0.1) {
-      dy = 0;
-    }
-  }
+  //
+  // Do not scroll off the map
+  //
+  scroll_map_set_bounds();
 }
 
 void Level::scroll_map(void)
@@ -336,18 +351,5 @@ void Level::scroll_map_set_target(void)
   //
   // Don't allow scrolling off the map
   //
-  if (g_opt_ascii) {
-    if (map_wanted_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
-      map_wanted_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
-    }
-    if (map_wanted_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
-      map_wanted_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
-    }
-    if (map_wanted_at.x < 0) {
-      map_wanted_at.x = 0;
-    }
-    if (map_wanted_at.y < 0) {
-      map_wanted_at.y = 0;
-    }
-  }
+  scroll_map_set_bounds();
 }

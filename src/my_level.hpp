@@ -1144,6 +1144,7 @@ public:
   void poison_gas_explosion(point at);
   void screen_shake_end(void);
   void scroll_map_do(bool fast);
+  void scroll_map_set_bounds(void);
   void scroll_map_set_target(void);
   void scroll_map_to_player_immediately(void);
   void scroll_map_to_player(void);

@@ -398,8 +398,11 @@ void Level::display_pixelart_map_all(void)
 
     glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
-    // sdl_fbo_dump(FBO_PIXELART_FULLMAP_LIGHT, "FULLMAP");
-    // sdl_fbo_dump(FBO_PIXELART_FULLMAP, "FULLMAP");
+
+    if (0) {
+      sdl_fbo_dump(FBO_PIXELART_FULLMAP_LIGHT, "FULLMAP_LIGHT");
+      sdl_fbo_dump(FBO_PIXELART_FULLMAP, "FULLMAP");
+    }
   }
 
   if (! frozen) {
