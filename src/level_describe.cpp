@@ -336,14 +336,6 @@ void Level::describe(point p)
     }
 
     wid_thing_info_fini("describe");
-
-    //
-    // If nothing else and hovering over the player show that
-    //
-    if (cursor && ! cursor->is_hidden && ! cursor->is_dead && (cursor->curr_at == player->curr_at) &&
-        player->aip()->move_path.empty()) {
-      push_back_if_unique(hover_over_things, player);
-    }
   }
 
   if (hover_over_things.size() > 1) {
@@ -412,6 +404,10 @@ void Level::describe(Thingp t)
   }
 
   if (t->is_hidden) {
+    return;
+  }
+
+  if (t->is_player()) {
     return;
   }
 
