@@ -741,8 +741,6 @@ void Thing::jump_end(void)
   move_to_immediately(curr_at);
   is_moving = true;
   move_finish();
-
-  infop()->last_failed_jump_at = point(-1, -1);
 }
 
 bool Thing::jump_attack(Thingp maybe_victim)

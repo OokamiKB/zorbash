@@ -39,10 +39,18 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   auto to         = ai->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
 
-  if (s.empty()) {
-    dbg("Path pop next move %s, path empty", future_pos.to_string().c_str());
-  } else {
-    dbg("Path pop next move %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+  IF_DEBUG
+  {
+    std::string s = "";
+    for (auto p : ai->move_path) {
+      s += " " + p.to_string();
+    }
+
+    if (s.empty()) {
+      dbg("Path pop next move %s, path empty", future_pos.to_string().c_str());
+    } else {
+      dbg("Path pop next move %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+    }
   }
   TRACE_AND_INDENT();
 
@@ -72,144 +80,149 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   //
   // Jump over obstacles if they appear in the path
   //
-  if ((curr_at != infop()->last_failed_jump_at) && is_able_to_jump() &&
-      (is_monst() || (is_player() && game->robot_mode))) {
-    if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
-      IF_DEBUG2
-      {
-        auto s = string_sprintf("Next position %d,%d is a hazard (move path size %d)", (int) future_pos.x,
-                                (int) future_pos.y, (int) ai->move_path.size());
-        AI_LOG(s);
-      }
+  if (is_able_to_jump()) {
+    dbg("Is able to jump check");
+    TRACE_AND_INDENT();
 
+    if (is_monst() || (is_player() && game->robot_mode)) {
+      dbg("Can try to jump");
       TRACE_AND_INDENT();
-      if (ai->move_path.size()) {
-        auto jump_pos = ai->move_path[ 0 ];
-        ai->move_path.erase(ai->move_path.begin());
 
+      if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
         IF_DEBUG2
         {
-          if (is_disliked_by_me(jump_pos)) {
-            auto s = string_sprintf("Next jump pos %d,%d (is disliked)", (int) jump_pos.x, (int) jump_pos.y);
-            AI_LOG(s);
-          } else {
-            auto s = string_sprintf("Next jump pos %d,%d", (int) jump_pos.x, (int) jump_pos.y);
-            AI_LOG(s);
-          }
+          auto s = string_sprintf("Next position %d,%d is a hazard (move path size %d)", (int) future_pos.x,
+                                  (int) future_pos.y, (int) ai->move_path.size());
+          AI_LOG(s);
         }
-
-        //
-        // If the thing we are going to land on is also a hazard, can we jump further?
-        //
         TRACE_AND_INDENT();
-        if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
-          IF_DEBUG2
-          {
-            auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
-            AI_LOG(s);
-          }
 
+        if (ai->move_path.size()) {
           auto jump_pos = ai->move_path[ 0 ];
           ai->move_path.erase(ai->move_path.begin());
 
-          if (is_disliked_by_me(jump_pos)) {
+          IF_DEBUG2
+          {
+            if (is_disliked_by_me(jump_pos)) {
+              auto s = string_sprintf("Next jump pos %d,%d (is disliked)", (int) jump_pos.x, (int) jump_pos.y);
+              AI_LOG(s);
+            } else {
+              auto s = string_sprintf("Next jump pos %d,%d", (int) jump_pos.x, (int) jump_pos.y);
+              AI_LOG(s);
+            }
+          }
+
+          //
+          // If the thing we are going to land on is also a hazard, can we jump further?
+          //
+          TRACE_AND_INDENT();
+          if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
+            IF_DEBUG2
+            {
+              auto s =
+                  string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+              AI_LOG(s);
+            }
+
+            auto jump_pos = ai->move_path[ 0 ];
+            ai->move_path.erase(ai->move_path.begin());
+
+            if (is_disliked_by_me(jump_pos)) {
+              //
+              // Give up. Don't bump the tick. This allows the monst to try an alternative path.
+              //
+              AI_LOG("Failed to jump cannot jump over hazards");
+              clear_move_path("Failed to jump cannot jump over all hazards");
+              return false;
+            } else if (try_to_jump_carefully(jump_pos)) {
+              AI_LOG("Long jump");
+              if (is_player()) {
+                game->tick_begin("Tried a long jump");
+              }
+              clear_move_path("long jump");
+              return true;
+            } else {
+              //
+              // Don't bump the tick. This allows the monst to try an alternative path.
+              //
+              AI_LOG("Failed to try a long jump");
+              clear_move_path("Failed to try a long jump");
+              return false;
+            }
+          } else if (is_disliked_by_me(jump_pos)) {
+            IF_DEBUG2
+            {
+              auto s =
+                  string_sprintf("Final jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+              AI_LOG(s);
+            }
+
             //
             // Give up. Don't bump the tick. This allows the monst to try an alternative path.
             //
             AI_LOG("Failed to jump cannot jump over hazards");
             clear_move_path("Failed to jump cannot jump over all hazards");
-            infop()->last_failed_jump_at = curr_at;
             return false;
-          } else if (try_to_jump_carefully(jump_pos)) {
-            AI_LOG("Long jump");
+          } else if (try_to_jump_carefully(jump_pos, &too_far)) {
+            AI_LOG("Jumped carefully");
             if (is_player()) {
-              game->tick_begin("Tried a long jump");
+              game->tick_begin("Jumped carefully");
             }
-            clear_move_path("long jump");
+            clear_move_path("Jumped carefully");
             return true;
           } else {
+            AI_LOG("Failed to jump carefully; try entire path");
+
             //
-            // Don't bump the tick. This allows the monst to try an alternative path.
+            // Try the entire path. This allows us to jump next to a thing that
+            // might have moved into our move path (and where we were trying to land.)
             //
-            AI_LOG("Failed to try a long jump");
-            clear_move_path("Failed to try a long jump");
-            infop()->last_failed_jump_at = curr_at;
+            for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
+              jump_pos = *pit;
+              if (distance(curr_at, jump_pos) < 2) {
+                break;
+              }
+              if (try_to_jump_carefully(jump_pos, &too_far)) {
+                IF_DEBUG2
+                {
+                  auto s = string_sprintf("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
+                  AI_LOG(s);
+                }
+                if (is_player()) {
+                  game->tick_begin("Jumped carefully");
+                }
+                clear_move_path("Jumped carefully");
+                return true;
+              }
+            }
+
+            clear_move_path("Failed to jump carefully");
+
+            if (too_far) {
+              if (any_unfriendly_monst_visible()) {
+                change_state(MONST_STATE_IDLE, "too far, need to rest but threat nearby, failed to jump");
+              } else {
+                change_state(MONST_STATE_RESTING, "too far, need to rest, failed to jump");
+              }
+            } else {
+              if (any_unfriendly_monst_visible()) {
+                change_state(MONST_STATE_IDLE, "need to rest but threat nearby, failed to jump");
+              } else {
+                change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
+              }
+            }
+
+            if (is_player() && game->robot_mode) {
+              AI_LOG("Failed to jump carefully; try wandering instead");
+              return ai_wander();
+            }
             return false;
           }
-        } else if (is_disliked_by_me(jump_pos)) {
-          IF_DEBUG2
-          {
-            auto s = string_sprintf("Final jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
-            AI_LOG(s);
-          }
-
-          //
-          // Give up. Don't bump the tick. This allows the monst to try an alternative path.
-          //
-          AI_LOG("Failed to jump cannot jump over hazards");
-          clear_move_path("Failed to jump cannot jump over all hazards");
-          infop()->last_failed_jump_at = curr_at;
-          return false;
-        } else if (try_to_jump_carefully(jump_pos, &too_far)) {
-          AI_LOG("Jumped carefully");
-          if (is_player()) {
-            game->tick_begin("Jumped carefully");
-          }
-          clear_move_path("Jumped carefully");
-          return true;
         } else {
-          AI_LOG("Failed to jump carefully; try entire path");
-
           //
-          // Try the entire path. This allows us to jump next to a thing that
-          // might have moved into our move path (and where we were trying to land.)
+          // Fall through to allow attack
           //
-          for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
-            jump_pos = *pit;
-            if (distance(curr_at, jump_pos) < 2) {
-              break;
-            }
-            if (try_to_jump_carefully(jump_pos, &too_far)) {
-              IF_DEBUG2
-              {
-                auto s = string_sprintf("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
-                AI_LOG(s);
-              }
-              if (is_player()) {
-                game->tick_begin("Jumped carefully");
-              }
-              clear_move_path("Jumped carefully");
-              return true;
-            }
-          }
-
-          clear_move_path("Failed to jump carefully");
-          infop()->last_failed_jump_at = curr_at;
-
-          if (too_far) {
-            if (any_unfriendly_monst_visible()) {
-              change_state(MONST_STATE_IDLE, "too far, need to rest but threat nearby, failed to jump");
-            } else {
-              change_state(MONST_STATE_RESTING, "too far, need to rest, failed to jump");
-            }
-          } else {
-            if (any_unfriendly_monst_visible()) {
-              change_state(MONST_STATE_IDLE, "need to rest but threat nearby, failed to jump");
-            } else {
-              change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
-            }
-          }
-
-          if (is_player() && game->robot_mode) {
-            AI_LOG("Failed to jump carefully; try wandering instead");
-            return ai_wander();
-          }
-          return false;
         }
-      } else {
-        //
-        // Fall through to allow attack
-        //
       }
     }
   }

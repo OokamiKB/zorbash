@@ -74,7 +74,6 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->health_max);
   out << bits(my.t->jump_distance_mod);
   out << bits(my.t->keys);
-  out << bits(my.t->last_failed_jump_at);
   out << bits(my.t->leader_id);
   out << bits(my.t->lifespan);
   out << bits(my.t->light_col);

@@ -112,8 +112,7 @@ public:
   float fall_height   = {}; // y offset for falling
   float wobble        = {}; // Fades when set
 
-  point lunge_to;            // When a monst attacks something
-  point last_failed_jump_at; // Previous jump attempt
+  point lunge_to; // When a monst attacks something
 
   int capacity_height     = {};
   int capacity_width      = {};

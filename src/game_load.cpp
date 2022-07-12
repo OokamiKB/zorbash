@@ -98,7 +98,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->health_max);
    in >> bits(my.t->jump_distance_mod);
    in >> bits(my.t->keys);
-   in >> bits(my.t->last_failed_jump_at);
    in >> bits(my.t->leader_id);
    in >> bits(my.t->lifespan);
    in >> bits(my.t->light_col);

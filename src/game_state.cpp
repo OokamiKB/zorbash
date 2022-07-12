@@ -67,11 +67,10 @@ void Game::change_state(int new_state)
   state = new_state;
 
   LOG("Game state change: %s -> %s", state_to_string(old_state).c_str(), state_to_string(new_state).c_str());
-  IF_DEBUG2 { backtrace_dump(); }
+  // IF_DEBUG2 { backtrace_dump(); }
 
   switch (new_state) {
     case STATE_NORMAL:
-      // backtrace_dump();
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
